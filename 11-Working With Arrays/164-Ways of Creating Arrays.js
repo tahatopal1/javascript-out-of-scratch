@@ -42,7 +42,7 @@ labelBalance.addEventListener('click', function () {
   );
 });
 
-// Getting array of DOM elements (nodeList) without using spread opt.
+// Getting array of DOM elements (nodeList) with using spread opt.
 const movementUI2 = [...document.querySelectorAll('.movements__value')];
 
 // ✅ Array.from is a more modern option since it accepts a callback function to perform some mapping operations

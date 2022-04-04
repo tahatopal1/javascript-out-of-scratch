@@ -31,6 +31,8 @@ document.addEventListener('keydown', function (e) {
 });
 
 // ---- SECTION 186 ----
+// ---- Selecting, Creating and Deleting Elements ----
+
 console.log(document.documentElement); // Entire HTML page
 console.log(document.head); // head
 console.log(document.body); // body
@@ -72,6 +74,7 @@ document
   });
 
 // ---- SECTION 187 ----
+// ---- Styles, Attributes and Classes ----
 
 // Styles
 message.style.backgroundColor = '#37383d';
@@ -122,3 +125,57 @@ logo.classList.contains('c');
 
 // Don't use, overrides all the existing classes and also allows us to only put one class
 //logo.className = 'jonas'
+
+// ---- SECTION 188 ----
+// ---- Implementing Smooth Scrolling ----
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect()); // target = btnScrollTo
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // Current scroll position
+  console.log(
+    'height/width viewport', // viewport = visible area of the page, it can shrink
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  // Scrolling
+  //window.scrollTo(s1coords.left, s1coords.top); // Relative to viewPort, not works accurately everytime
+  /*  /window.scrollTo(
+    s1coords.left + window.pageXOffset,
+    s1coords.top + window.pageYOffset
+  );*/ // This is the solution, this gives us the absolute solution
+
+  // More enhanced way
+  /*window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth', // Ensures a smooth scrolling
+  });*/
+
+  // Even more modern way :)
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// ---- SECTION 189 ----
+// ---- Types of Events and Event Listeners ----
+const h1 = document.querySelector('h1');
+const alertH1 = function (e) {
+  alert('addEventListener: Great! You are reading the heading :)');
+  h1.removeEventListener('mouseenter', alertH1); // Ensures to work 'alertH1' only for once
+};
+h1.addEventListener('mouseenter', alertH1);
+
+// Another way to attaching an event listener
+/*h1.onmouseenter = function (e) {
+  alert('addEventListener: Great! You are reading the heading :)');
+};*/
+
+// addEventListener is better because:
+// addEventListener allows us to multiple event listener whereas direct attaching overrides all eventlisteners with only single one
+
+// Second one and even more important is that we can actually remove event handler that we don't need anymore

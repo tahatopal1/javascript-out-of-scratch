@@ -1,5 +1,5 @@
 'use strict';
-// Calculating day passed between to dates
+// Calculating day passed between two dates
 const future = new Date(2000, 10, 19, 15, 13);
 console.log(+future); // Converting Number to fetch timestamp
 

@@ -20,6 +20,6 @@ console.log(isEven(514));
 
 console.log('---- isDivisable ----');
 const isDivisable = (n, d) => n % d === 0;
-console.log(isEven(8, 4));
-console.log(isEven(23, 4));
-console.log(isEven(514, 4));
+console.log(isDivisable(8, 4));
+console.log(isDivisable(23, 4));
+console.log(isDivisable(514, 4));

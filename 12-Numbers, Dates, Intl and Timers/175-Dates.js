@@ -36,9 +36,9 @@ console.log(future.getFullYear());
 console.log(future.getMonth()); // Zero based
 console.log(future.getDate()); // Gets day of the month
 console.log(future.getDay()); // Gets day of week (zero based)
-console.log(future.getHours()); // Gets day of week (zero based)
-console.log(future.getMinutes()); // Gets day of week (zero based)
-console.log(future.getSeconds()); // Gets day of week (zero based)
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
 
 // To ISO String
 console.log(future.toISOString());

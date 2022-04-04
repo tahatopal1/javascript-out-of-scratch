@@ -10,7 +10,7 @@ console.log(2 ** 53 + 3);
 console.log(2 ** 53 + 4);
 
 // We make it BigInt by putting n to end of the number or with BigInt constructor
-console.log('---- Bigint examples');
+console.log('---- Bigint examples ----');
 console.log(512344124521515155224512562512321n);
 console.log(BigInt(512344));
 

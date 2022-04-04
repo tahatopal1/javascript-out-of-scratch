@@ -55,7 +55,7 @@ console.log(Number.parseInt('e23')); // NaN
 console.log(Number.parseInt('2.5rem')); // 2
 console.log(Number.parseFloat('2.5rem')); // 2.5
 
-// This will also work since they are 'global functions2
+// This will also work since they are 'global functions'
 console.log(parseInt('2.5rem'));
 console.log(parseFloat('2.5rem'));
 

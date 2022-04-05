@@ -238,3 +238,53 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// ---- SECTION 193 ----
+// ---- DOM Traversing ----
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes); // Nodes
+console.log(h1.children); // HTML Collection
+
+h1.firstElementChild.style.color = 'white'; // HTML element
+h1.lastElementChild.style.color = 'black'; // HTML element
+
+// Going upwards: parents
+console.log(h1.parentNode); // parent is: header__title
+console.log(h1.parentElement); // parent is: header__title again
+
+// gives header node
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// gives the element itself
+h1.closest('h1').style.background = 'var(--gradient-primary)';
+
+// Going sideways: siblings
+// We can only access direct siblings
+console.log(h1.previousElementSibling); // null: h1 is the first element of its parent
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling); // returns node
+console.log(h1.nextSibling);
+
+// Traversing all siblings
+console.log(h1.parentElement.children); // All sibling including itself
+
+// Packing children and excluding h1
+[...h1.parentElement.children].forEach(function (el) {
+  el !== h1 && (el.style.transform = 'scale(0.5)');
+});
+
+// ---- SECTION 194 ----
+// ---- Tabbed Component ----
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+//tabs.forEach(t => t.addEventListener('click', () => console.log('Tab')));
+
+// Using event delegation
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+});

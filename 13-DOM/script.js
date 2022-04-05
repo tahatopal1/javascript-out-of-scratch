@@ -161,8 +161,6 @@ btnScrollTo.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-// ---- SECTION 189 ----
-// ---- Types of Events and Event Listeners ----
 const h1 = document.querySelector('h1');
 const alertH1 = function (e) {
   alert('addEventListener: Great! You are reading the heading :)');
@@ -179,3 +177,64 @@ h1.addEventListener('mouseenter', alertH1);
 // addEventListener allows us to multiple event listener whereas direct attaching overrides all eventlisteners with only single one
 
 // Second one and even more important is that we can actually remove event handler that we don't need anymore
+
+// ---- SECTION 191 ----
+// ---- Event Propogation ----
+// rgb(255,255,255)
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+console.log(randomColor());
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor(); // this == document.querySelector('.nav__link')
+  console.log('LINK', e.target, e.currentTarget); // target = where the event first happened
+  console.log(e.currentTarget === this);
+
+  // Stop propogation
+  e.stopPropagation(); // It's that simple
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget); // target = where the event first happened
+});
+
+document.querySelector('.nav').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('LINK', e.target, e.currentTarget); // target = where the event first happened
+  },
+  false
+); // true => no longer listens bubbling phase, it listens capturing phase instead
+// It is false by default anyways
+// So if true, NAV will be showed down first on the console logs
+
+// ---- SECTION 192 ----
+// ---- Event Delegation ----
+
+// Page navigation
+
+/*document.querySelectorAll('.nav__link').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    const id = this.getAttribute('href'); // #section1, #section2, #section3 ids
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
+}); */ // If we have 1000 of component like this, it means 1000 copies of this event listener. It will definitely affect the performance
+
+// Better solution: Event delegation
+
+// 1st step: Add event listener to a common parent element
+// 2st step: Detemine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});

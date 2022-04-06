@@ -285,6 +285,66 @@ const tabsContent = document.querySelectorAll('.operations__content');
 //tabs.forEach(t => t.addEventListener('click', () => console.log('Tab')));
 
 // Using event delegation
+// Altough you click span, it will indicate button
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab');
+
+  // Guard clause
+  clicked && clicked.classList.add('operations__tab--active');
+
+  // Remove active class
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+  // Activate content area
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
+
+// ---- SECTION 195 ----
+// ---- Passing Arguments to Event Handlers ----
+
+// Menu fade animation
+// For event delegation, chosen parent is: nav
+
+// Function for clean code
+const changeOpacity = function (e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+    siblings.forEach(el => {
+      el !== link && (el.style.opacity = this);
+    });
+    logo.style.opacity = this;
+  }
+};
+
+const nav = document.querySelector('.nav');
+
+/*nav.addEventListener('mouseover', function (e) {
+  changeOpacity(e, 0.5);
+});
+
+nav.addEventListener('mouseout', function (e) {
+  changeOpacity(e, 1);
+});*/
+
+// With bind method
+nav.addEventListener('mouseover', changeOpacity.bind(0.5));
+nav.addEventListener('mouseout', changeOpacity.bind(1));
+
+// ---- SECTION 196 ----
+// ---- Scroll Event ----
+
+// Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+
+/*window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+});*/
+nav.classList.add('sticky');

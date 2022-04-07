@@ -347,4 +347,65 @@ const initialCoords = section1.getBoundingClientRect();
     nav.classList.add('sticky');
   } else nav.classList.remove('sticky');
 });*/
-nav.classList.add('sticky');
+//nav.classList.add('sticky');
+
+// ---- SECTION 197 ----
+// ---- Better way to Sticky Navigation: Intersection Observer API ----
+const obsCallback = function (entries, observer) {
+  // Will get called on scrolling (instersection)
+  // Array of threshold entries
+  entries.forEach(entry => {
+    console.log('Observing section1: ');
+    console.log(entry);
+  });
+};
+const obsOptions = {
+  root: null, // root element the target will intersect (null = intersecting the whole viewport)
+  //threshold: 0.1, // intersecting %10 of viewport
+
+  // 0 percent: Our callback will trigger each time that the target element moves completely out of the view, also as soon as it enters the view
+  // 100 percent (1): callback will only be called when %100 percent of target is actually visible in viewport
+  threshold: [0, 0.2], // intersecting %10 of viewport
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1); // section 1 is target
+
+const navHeight = nav.getBoundingClientRect().height;
+// Observing header to make it sticky
+const stickyNav = function (entries) {
+  const [entry] = entries; // entry = entries[0]
+  console.log('Observing header: ');
+  console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  //rootMargin: '-90px', // Navigation will appear 90 pixels before the header goes off
+  rootMargin: `-${navHeight}px`, // Navigation will appear 90 pixels before the header goes off
+});
+headerObserver.observe(header);
+
+// ---- SECTION 198 ----
+// ---- Revealing Elements on Scroll ----
+
+// Reveal sections
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target); // Don't observe anymore
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});

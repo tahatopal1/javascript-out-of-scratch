@@ -407,5 +407,153 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 });
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  //section.classList.add('section--hidden');
 });
+
+// ---- SECTION 199 ----
+// ---- Lazy Loading Images ----
+
+// Very good for performance
+const imgTargets = document.querySelectorAll('img[data-src]');
+console.log(imgTargets);
+
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  console.log('Observing image: ');
+  console.log(entry);
+  if (!entry.isIntersecting) return;
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  // Removing the blur as soon as picture is fully loaded
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target); // No longer needed
+};
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '-200px', // We won't see any delay once we declare this
+});
+imgTargets.forEach(img => imgObserver.observe(img));
+
+// ---- SECTION 200 ----
+// ---- Slider Component Part 1 ----
+
+// Slider
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const maxSlide = slides.length;
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotContainer = document.querySelector('.dots');
+
+  let curSlide = 0;
+
+  const createDots = function () {
+    slides.forEach(function (_s, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  // Next slide
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  // Previous slide
+  const prevSlide = function name() {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  // Slider init
+  const init = function () {
+    goToSlide(0);
+    createDots();
+    activateDot(0);
+  };
+
+  init();
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  const slider = document.querySelector('.slider');
+  slider.style.transform = 'scale(0.5)';
+
+  // ---- SECTION 201 ----
+  // ---- Slider Component Part 2 ----
+  document.addEventListener('keydown', function (e) {
+    console.log(e);
+    e.key === 'ArrowLeft' && prevSlide();
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  // Event delegation
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+
+slider();
+
+// ---- SECTION 202 ----
+// ---- Lifecycle DOM Events ----
+
+// DOMContentLoaded: This event is fired by the document as soon as the html completely parsed
+// Which means that the HTML has been downloaded and been converted to the DOM tree
+// Also all scripts must be downloaded and executed before the DOMContentLoaded event can happen
+
+// Does not wait for images and other for external resources to load
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+// load: Fired by the window as soon as not only html is parsed, but also all the images and external sources like CSS files are also loaded
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// beforeunload: Is created immediately before a user is about to leave a page
+/*window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+});*/

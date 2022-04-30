@@ -45,7 +45,7 @@ console.log(0.1 + 0.2 === 0.3); // false
 // Conversion
 console.log('---- CONVERSION ----');
 console.log(Number('23'));
-console.log(+'23'); //  More easier vay
+console.log(+'23'); //  More easier way
 
 // Parsing
 console.log('---- PARSING ----');

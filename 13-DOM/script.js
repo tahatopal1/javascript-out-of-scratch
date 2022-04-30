@@ -198,14 +198,14 @@ document.querySelector('.nav__link').addEventListener('click', function (e) {
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   this.style.backgroundColor = randomColor();
-  console.log('LINK', e.target, e.currentTarget); // target = where the event first happened
+  console.log('CONTAINER', e.target, e.currentTarget); // target = where the event first happened
 });
 
 document.querySelector('.nav').addEventListener(
   'click',
   function (e) {
     this.style.backgroundColor = randomColor();
-    console.log('LINK', e.target, e.currentTarget); // target = where the event first happened
+    console.log('NAV', e.target, e.currentTarget); // target = where the event first happened
   },
   false
 ); // true => no longer listens bubbling phase, it listens capturing phase instead
@@ -396,18 +396,21 @@ const allSections = document.querySelectorAll('.section');
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
+
   if (!entry.isIntersecting) return;
+
   entry.target.classList.remove('section--hidden');
-  observer.unobserve(entry.target); // Don't observe anymore
+  observer.unobserve(entry.target);
 };
 
 const sectionObserver = new IntersectionObserver(revealSection, {
   root: null,
   threshold: 0.15,
 });
+
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
-  //section.classList.add('section--hidden');
+  section.classList.add('section--hidden');
 });
 
 // ---- SECTION 199 ----

@@ -8,5 +8,5 @@ console.log(movements.includes(-130));
 const anyDeposits = movements.some(mov => mov > 0);
 console.log(anyDeposits); // Has deposits
 
-const everyDeposits = movements.every(move => mov > 0);
-console.log(everyDeposits); // Is everyone them deposit
+const everyDeposits = movements.every(mov => mov > 0);
+console.log(everyDeposits); // Are they all deposit

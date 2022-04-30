@@ -46,7 +46,7 @@ let overall = accounts
   .reduce((accumulator, mov) => accumulator + mov, 0);
 console.log(overall);
 
-// Findind overall balance with flatMap
+// Finding overall balance with flatMap
 overall = accounts
   .flatMap(account => account.movements)
   .reduce((accumulator, mov) => accumulator + mov, 0);

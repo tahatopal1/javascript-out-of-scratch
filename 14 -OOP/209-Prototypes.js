@@ -22,7 +22,7 @@ matilda.calcAge();
 jack.calcAge();
 
 console.log(jonas.__proto__);
-console.log(jonas.__proto__ === Person.prototype); // true0
+console.log(jonas.__proto__ === Person.prototype); // true
 
 console.log(Person.prototype.isPrototypeOf(jonas)); // true
 console.log(Person.prototype.isPrototypeOf(matilda)); // true

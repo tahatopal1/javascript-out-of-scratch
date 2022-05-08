@@ -397,7 +397,7 @@ const allSections = document.querySelectorAll('.section');
 const revealSection = function (entries, observer) {
   const [entry] = entries;
 
-  if (!entry.isIntersecting) return;
+  //if (!entry.isIntersecting) return;
 
   entry.target.classList.remove('section--hidden');
   observer.unobserve(entry.target);
@@ -439,7 +439,7 @@ const loadImg = function (entries, observer) {
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
-  rootMargin: '-200px', // We won't see any delay once we declare this
+  rootMargin: '200px', // We won't see any delay once we declare this
 });
 imgTargets.forEach(img => imgObserver.observe(img));
 
@@ -449,15 +449,16 @@ imgTargets.forEach(img => imgObserver.observe(img));
 // Slider
 const slider = function () {
   const slides = document.querySelectorAll('.slide');
-  const maxSlide = slides.length;
   const btnLeft = document.querySelector('.slider__btn--left');
   const btnRight = document.querySelector('.slider__btn--right');
   const dotContainer = document.querySelector('.dots');
 
   let curSlide = 0;
+  const maxSlide = slides.length;
 
+  // Functions
   const createDots = function () {
-    slides.forEach(function (_s, i) {
+    slides.forEach(function (_, i) {
       dotContainer.insertAdjacentHTML(
         'beforeend',
         `<button class="dots__dot" data-slide="${i}"></button>`
@@ -469,6 +470,7 @@ const slider = function () {
     document
       .querySelectorAll('.dots__dot')
       .forEach(dot => dot.classList.remove('dots__dot--active'));
+
     document
       .querySelector(`.dots__dot[data-slide="${slide}"]`)
       .classList.add('dots__dot--active');
@@ -487,12 +489,12 @@ const slider = function () {
     } else {
       curSlide++;
     }
+
     goToSlide(curSlide);
     activateDot(curSlide);
   };
 
-  // Previous slide
-  const prevSlide = function name() {
+  const prevSlide = function () {
     if (curSlide === 0) {
       curSlide = maxSlide - 1;
     } else {
@@ -502,30 +504,23 @@ const slider = function () {
     activateDot(curSlide);
   };
 
-  // Slider init
   const init = function () {
     goToSlide(0);
     createDots();
+
     activateDot(0);
   };
-
   init();
 
+  // Event handlers
   btnRight.addEventListener('click', nextSlide);
   btnLeft.addEventListener('click', prevSlide);
 
-  const slider = document.querySelector('.slider');
-  slider.style.transform = 'scale(0.5)';
-
-  // ---- SECTION 201 ----
-  // ---- Slider Component Part 2 ----
   document.addEventListener('keydown', function (e) {
-    console.log(e);
-    e.key === 'ArrowLeft' && prevSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
     e.key === 'ArrowRight' && nextSlide();
   });
 
-  // Event delegation
   dotContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('dots__dot')) {
       const { slide } = e.target.dataset;
@@ -534,7 +529,6 @@ const slider = function () {
     }
   });
 };
-
 slider();
 
 // ---- SECTION 202 ----

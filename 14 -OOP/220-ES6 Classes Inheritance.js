@@ -12,7 +12,7 @@ class PersonCl {
     console.log(2022 - this.birthYear);
   }
 
-  // No commas between classes
+  // No commas between methods
   greet() {
     console.log(`Hey ${this.fullName}`);
   }
@@ -46,7 +46,7 @@ class StudentCl extends PersonCl {
   // Override
   calcAge() {
     console.log(
-      `I'm ${2022 - this.birthYear} i study a lot since i'm a student`
+      `I'm ${2022 - this.birthYear}, i study a lot since i'm a student`
     );
   }
 }

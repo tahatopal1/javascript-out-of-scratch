@@ -21,7 +21,7 @@ StudentProto.init = function (firstName, birthYear, course) {
   this.course = course;
 };
 
-StudentProto.introduce = function name(params) {
+StudentProto.introduce = function (params) {
   console.log(`My name is ${this.firstName} and I study ${this.course}`);
 };
 

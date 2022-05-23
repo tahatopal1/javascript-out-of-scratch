@@ -17,4 +17,6 @@ const getPosition = function () {
   });
 };
 
-getPosition.then(pos => console.log(pos)).catch(err => console.log(err));
+getPosition()
+  .then(pos => console.log(pos))
+  .catch(err => console.log(err));

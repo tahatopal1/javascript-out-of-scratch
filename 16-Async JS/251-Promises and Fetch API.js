@@ -15,7 +15,7 @@ console.log(request);
 
   🟢 A container for a future value (Example: Response from AJAX call)
 
-  ✅ We no longer need to rely events and callbacks passed into asynchronous functionstı handle asynchronous results
+  ✅ We no longer need to rely events and callbacks passed into asynchronous functions handle asynchronous results
 
   ✅ Instead of nesting callbacks, we can chain promises for a sequence of asynchronous operations and escape callback hell 👌
 

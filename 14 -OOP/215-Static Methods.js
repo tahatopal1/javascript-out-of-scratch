@@ -17,7 +17,7 @@ const jack = new Person('Jack', 2017);
 // Declaring static function
 Person.hey = function () {
   console.log('Hey there !');
-  console.log(this); // Logs the entire contructor function
+  console.log(this); // Logs the entire constructor function
 };
 
 Person.hey(); // Works

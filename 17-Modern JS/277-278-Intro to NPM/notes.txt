@@ -1,0 +1,9 @@
+1) We can run parcel with this instruction: npx parcel index.html
+
+2) "start":"parcel index.html" -> we can do it like that: npm run start
+
+3) Parcel actually automatically uses Babel to transpile our code
+
+4) Transpilling is basicly transforming the ES6 syntax to ES5. Polyfilling is transforming the new syntax like find method or Promises to ES5
+
+4) Parcel serves transpilling out of the box but demands another stuff to do polyfilling

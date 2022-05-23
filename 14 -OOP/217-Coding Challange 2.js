@@ -1,7 +1,7 @@
 'use strict';
 
 class Car {
-  construtor(make, speed) {
+  constructor(make, speed) {
     this.make = make;
     this.speed = speed;
   }

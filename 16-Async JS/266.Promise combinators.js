@@ -30,12 +30,12 @@ const timeout = function (sec) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
       reject(new Error('Request took too long!'));
-    });
+    }, sec * 1000);
   });
 };
 
 // Race against timeout (5 seconds)
-Promise.race([getJSON(`https://restcountries.com/v2/name/mexico`)], timeout(5))
+Promise.race([getJSON(`https://restcountries.com/v2/name/mexico`), timeout(5)])
   .then(res => console.log(res[0]))
   .catch(err => console.log(err));
 

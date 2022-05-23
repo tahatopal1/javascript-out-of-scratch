@@ -1,0 +1,13 @@
+1. In terminal window; go to the 18-Final Project folder and type "npm init"
+
+2. Load parcel by typing npm i parcel -D
+
+3. Customize package.json
+
+- Remove "main":"index.html" line
+- Add scripts: "start":"parcel index.html" and "build":"parcel build index.html"
+- Then you can start project with parcel by simply typing "npm start"
+
+3. Load sass by typing npm i sass
+
+4. Load fractional library by typing npm i fractional (We'll use it for basic math operations)

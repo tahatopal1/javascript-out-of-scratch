@@ -49,3 +49,6 @@ const index_steven = accounts.findIndex(
 console.log('Before removing', ...accounts);
 accounts.splice(index_steven, 1);
 console.log('After removing', ...accounts);
+
+const fads = movements.find(mov => mov == 0);
+console.log(fads);

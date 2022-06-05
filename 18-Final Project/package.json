@@ -2,16 +2,17 @@
   "name": "18-final-project",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
-  "author": "Taha Topal",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.5.0",
+    "@parcel/transformer-sass": "^2.6.0",
     "core-js": "^3.22.5",
-    "parcel": "^2.5.0",
+    "parcel": "^2.6.0",
     "sass": "^1.26.10"
   },
   "dependencies": {
